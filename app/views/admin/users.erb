@@ -1,0 +1,28 @@
+<table border="1">
+<tr>
+<th>UID</th>
+<th># Tags</th>
+<th>Tag Strings</th>
+</tr>
+
+<% @users.each do |u| -%>
+
+<tr>
+<td><%= link_to u.uid, :controller => :admin, :action => :user, :id => u.id %></td>
+<td><%= u.references.length %></td>
+
+<% @tag_array = Set.new; %>
+<% u.references.each do |r| -%>
+<% @tag_array.add(r.tag.tag); %>
+<% end -%>
+
+<td>
+<% @tag_array.each do |t| -%>
+<%= t %>, 
+<% end -%>
+</td>
+</tr>
+
+<% end -%>
+
+</table>

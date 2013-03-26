@@ -1,0 +1,32 @@
+<script type="text/javascript">
+  function lowerSide(val) {
+    lower = Math.floor(val * 1000) * 1000;
+    return lower;
+  }
+  function upperSide(val) {
+    upper = Math.floor(val * 1000 + 1) * 1000;
+    return upper;
+  }
+
+  function drawOverlay() {
+  <% if(!@result.nil?) %>
+    <% @result.each do |r| %>
+      var sw = new google.maps.LatLng(lowerSide(<%= r.lat %>), upperSide(<%= r.lon %>));
+      var ne = new google.maps.LatLng(upperSide(<%= r.lat %>), upperSide(<%= r.lon %>));
+      var bounds = new google.maps.LatLngBounds(sw, ne);
+      var rectOptions = {
+        strokeColor: "#FF0000",
+                     strokeOpacity: 0.8,
+                     strokeWeight: 2,
+                     fillColor: "#FF0000",
+                     fillOpacity: 0.35,
+                     bounds: bounds
+      };
+      var rect = new google.maps.Rectangle(rectOptions);
+      rect.setMap(map);
+    <% end %>
+  <% end %>
+  }
+
+  drawOverlay();
+</script>

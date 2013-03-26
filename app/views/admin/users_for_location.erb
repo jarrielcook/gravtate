@@ -1,0 +1,27 @@
+User tags for location: [<%= @location.lat %>, <%= @location.lon %>]
+<br/><br/><br/>
+
+<table border="1">
+<tr>
+<th>UID</th>
+<th>Tag</th>
+</tr>
+
+<% @users_for_location.each do |u| -%>
+
+<tr>
+<td><%= link_to u.uid, :controller => :admin, :action => :user, :id => u.id %></td>
+
+<td>
+<% u.references.each do |r| -%>
+<% if(r.location.id == @location.id) %>
+<%= link_to r.tag.tag, :controller => :admin, :action => :tag, :id => r.tag.id %>, 
+<% end %>
+<% end -%>
+</td>
+
+</tr>
+
+<% end -%>
+
+</table>

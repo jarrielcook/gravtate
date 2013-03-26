@@ -1,0 +1,12 @@
+<h1>Advertiser Login</h1>
+
+<h3>
+Unauthorized access or use of this computer system is prohibited.  All users expressly consent to monitoring of their activities by system personnel and understand that information relating to possible criminal conduct may be provided to officials for disciplinary and/or legal action.
+By continuing to use this system, you indicate your awareness of and consent to these terms and conditions of use.
+</h3>
+
+<% form_tag :action => 'validate' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Login" %>
+<% end %>
+

@@ -1,0 +1,27 @@
+Report for tag: <%= @tag.tag %>
+<br/><br/><br/>
+
+<table border="1">
+
+<tr>
+<th>Latitude</th>
+<th>Longitude</th>
+<th># Users</th>
+<th>Created</th>
+</tr>
+
+<% @tag.references.each do |r| -%>
+
+<tr>
+<td><%= link_to r.location.lat, :controller => :admin, :action => :location, :id => r.location.id %></td>
+<td><%= link_to r.location.lon, :controller => :admin, :action => :location, :id => r.location.id %></td>
+<td><%= link_to_if (r.users.length > 0), r.users.length, :controller => :admin, :action => :users_for_tag, :id => @tag.id %></td>
+<td><%= r.created_at %></td>
+</tr>
+
+<% end -%>
+
+</table>
+
+<br/><br/><br/>
+<%= link_to 'All Tags', :controller => :admin, :action => :tags %>

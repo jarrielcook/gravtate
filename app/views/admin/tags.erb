@@ -1,0 +1,52 @@
+<table border="0">
+<tr>
+<td bgcolor="#c0c0c0">&nbsp&nbsp</td>
+<td>Abusive</td>
+<td bgcolor="#ffff00">&nbsp&nbsp</td>
+<td>Suspect</td>
+</table>
+
+<table border="1">
+<tr>
+<th>Tag</th>
+<th># Locations</th>
+<th># Users</th>
+<th>Actions</th>
+</tr>
+
+<% @tags.each do |t| -%>
+
+<tr>
+<td
+<% if(t.abusive) %>
+bgcolor="#c0c0c0"
+<% elsif(t.suspect) %>
+bgcolor="#ffff00"
+<% end %>
+>
+<%= link_to t.tag, :controller => :admin, :action => :tag, :id => t.id %>
+</td>
+
+<td><%= t.locations.length %></td>
+
+<% @user_count = 0; %>
+<% t.references.each do |r| -%>
+
+<% @user_count = @user_count + r.users.length; %>
+
+<% end -%>
+<td><%= @user_count %></td>
+
+<td>
+<% if(t.suspect) %>
+<%= link_to 'Clear Suspect', { :controller => :admin, :action => :clear_suspect}, :confirm => 'Are you sure you want to clear the suspect flag for "' + t.tag + '"?', :id => t.id %>
+&nbsp
+<% end %>
+<% if(!t.abusive) %>
+<%= link_to 'Mark Abusive', { :controller => :admin, :action => :make_abusive}, :confirm => 'Are you sure you want to set the abusive flag for "' + t.tag + '"?', :id => t.id %>
+<% end %>
+</td>
+
+<% end -%>
+
+</table>

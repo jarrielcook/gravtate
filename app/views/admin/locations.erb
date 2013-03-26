@@ -1,0 +1,30 @@
+<table border="1">
+<tr>
+<th>Latitude</th>
+<th>Longitude</th>
+<th># Tags</th>
+<th>Tag Strings</th>
+</tr>
+
+<% @locations.each do |l| -%>
+
+<tr>
+<td><%= link_to l.lat, :controller => :admin, :action => :location, :id => l.id %></td>
+<td><%= link_to l.lon, :controller => :admin, :action => :location, :id => l.id %></td>
+<td><%= l.tags.length %></td>
+
+<% @tag_array = Set.new; %>
+<% l.tags.each do |t| -%>
+<% @tag_array.add(t.tag); %>
+<% end -%>
+
+<td>
+<% @tag_array.each do |t| -%>
+<%= t %>, 
+<% end -%>
+</td>
+</tr>
+
+<% end -%>
+
+</table>

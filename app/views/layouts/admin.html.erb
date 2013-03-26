@@ -1,0 +1,4 @@
+<% if(session[:admin]) %>
+<div style="float:right"><%= link_to 'Logout', :action => :logout %></div>
+<% end %>
+<%= yield %>
